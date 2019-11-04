@@ -76,12 +76,61 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            while (true)
 
-            //switch(nav){...}
+            {
+
+               Console.WriteLine("Type '+' or '-'  to add or remove from the list or zero to exit :");
+
+               List<string> theList = new List<string>();
+               string input = Console.ReadLine();
+               char nav = input[0];
+               string value = input.Substring(1);
+           
+               
+                //Console.WriteLine("0.  Exit ");
+                //Console.WriteLine(".  Add to the List .");
+                //Console.WriteLine("2.  Remove from the List.");
+
+               // int a = int.Parse(Console.ReadLine());
+                
+                switch (nav)
+                {
+                    case '0':
+                        {
+                            return;
+                        }
+
+                    case '+':
+
+                        {
+                            Console.WriteLine("Enter value:");
+                            value = Console.ReadLine();
+                            theList.Add(value);
+                           // Console.WriteLine($"theList[0]: {theList[0]} ");
+                            Console.WriteLine($"the List Capacity: {theList.Capacity }");
+                            Console.WriteLine($"the List Count: {theList.Count }");
+
+                            break;
+
+                        }
+
+                    case '-':
+
+                        {
+                            Console.WriteLine("Enter value:");
+                            value = Console.ReadLine();
+                            theList.Remove(value);
+                            // Console.WriteLine($"theList[0]: {theList[0]} ");
+                            Console.WriteLine($"the List Capacity: {theList.Capacity }");
+                            Console.WriteLine($"the List Count: {theList.Count }");
+                            break;
+
+                        }
+
+
+                }
+            }
         }
 
         /// <summary>
@@ -94,7 +143,18 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
-        }
+            Queue<string> thequeue = new Queue<string>();
+            while (true)
+
+            {
+  
+                Console.WriteLine("Type '+' or '-'  to add or remove from the queue or zero to exit: ");
+                string input = Console.ReadLine();
+                TestQueue(input, thequeue);
+
+            }
+
+    }
 
         /// <summary>
         /// Examines the datastructure Stack
@@ -106,6 +166,16 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+            Stack<string> thestack = new Stack<string>();
+            while (true)
+
+            {
+                Console.WriteLine("Type '+' or '-'  to add or remove from the stack, '1' to revers input characters or zero to exit: ");
+                string input = Console.ReadLine();
+                TestStack(input, thestack);
+            }
+
+
         }
 
         static void CheckParanthesis()
@@ -115,6 +185,124 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+        }
+
+        static void TestQueue(string input, Queue<string> queue) 
+
+        {  
+            char nav = input[0];
+            string value = input.Substring(1);
+
+            switch (nav)
+            {
+                case '0':
+                    {
+                        return;
+                    }
+
+                case '+':
+
+                    {                
+                        Console.WriteLine("Enter value:");
+                        value = Console.ReadLine();
+                        queue.Enqueue(value);
+                        foreach (Object obj in queue)
+                        {
+                            Console.WriteLine("..............................");
+                            Console.WriteLine(obj);
+                        }
+                        Console.WriteLine($"Number of elements in the Queue: {0} : {queue.Count }");
+                        break;
+                    }
+
+                case '-':
+
+                    {
+                        
+                        queue.Dequeue();
+                        foreach (Object obj in queue)
+                        {
+                            Console.WriteLine("..............................");
+                            Console.WriteLine(obj);
+                        }
+                        Console.WriteLine($"Number of elements in the Queue: {0} : {queue.Count }");
+                        break;
+                    }
+
+            }
+
+        }
+
+        static void TestStack(string input, Stack<string> stack)
+
+        {
+            char nav = input[0];
+            string value = input.Substring(1);
+
+            switch (nav)
+            {
+                case '0':
+                    {
+                        return;
+                    }
+
+                case '+':
+
+                    {
+                        Console.WriteLine("Enter value:");
+                        value = Console.ReadLine();
+                        stack.Push(value);
+                        foreach (Object obj in stack)
+                        {
+                            Console.WriteLine("..............................");
+                            Console.WriteLine(obj);
+                        }
+                        Console.WriteLine($"Number of elements in the Stack: {0} : {stack.Count }");
+                        break;
+                    }
+
+                case '-':
+
+                    {
+                        
+                        stack.Pop();
+                        foreach (Object obj in stack)
+                        {
+                            Console.WriteLine("..............................");
+                            Console.WriteLine(obj);
+                        }
+                        Console.WriteLine($"Number of elements in the Stack: {0} : {stack.Count }");
+                        break;
+
+                    }
+
+                case '1':
+
+                    {
+                        Console.WriteLine("Please enter string:");
+                        value = Console.ReadLine();
+                        ReverseTex(value, stack);
+                        break;
+
+                    }
+
+            }
+
+        }
+
+        static void ReverseTex(string input, Stack<string> stack)
+        {        
+            char[] cArray = input.ToCharArray();
+            for (int i = 0 ; i < cArray.Length ; i++)
+            {
+                stack.Push(cArray[i].ToString());
+            }
+
+            foreach (Object obj in stack)
+            {
+                Console.WriteLine(obj);
+            }
 
         }
 
