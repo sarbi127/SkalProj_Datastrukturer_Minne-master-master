@@ -183,7 +183,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
-            Stack<string> thestack = new Stack<string>();
+            Stack<char> thestack = new Stack<char>();
             while (true)
 
             {
