@@ -86,14 +86,7 @@ namespace SkalProj_Datastrukturer_Minne
                string input = Console.ReadLine();
                char nav = input[0];
                string value = input.Substring(1);
-           
-               
-                //Console.WriteLine("0.  Exit ");
-                //Console.WriteLine(".  Add to the List .");
-                //Console.WriteLine("2.  Remove from the List.");
-
-               // int a = int.Parse(Console.ReadLine());
-                
+                 
                 switch (nav)
                 {
                     case '0':
@@ -146,12 +139,13 @@ namespace SkalProj_Datastrukturer_Minne
             Queue<string> thequeue = new Queue<string>();
             while (true)
 
-            {
-  
+            { 
                 Console.WriteLine("Type '+' or '-'  to add or remove from the queue or zero to exit: ");
                 string input = Console.ReadLine();
-                TestQueue(input, thequeue);
-
+                char nav = input[0];
+                if (nav == '0') { return; }
+                else { TestQueue(input, thequeue); }
+                        
             }
 
     }
@@ -172,7 +166,10 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 Console.WriteLine("Type '+' or '-'  to add or remove from the stack, '1' to revers input characters or zero to exit: ");
                 string input = Console.ReadLine();
-                TestStack(input, thestack);
+                char nav = input[0];
+                if (nav == '0') { return; }
+                else { TestStack(input, thestack);  }
+                        
             }
 
 
@@ -186,6 +183,17 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            Stack<string> thestack = new Stack<string>();
+            while (true)
+
+            {
+                Console.WriteLine("Type '1' to check paranthesis or zero to exit: ");
+                string input = Console.ReadLine();
+                char nav = input[0];
+                if (nav == '0') { return; }
+                else { CheckParentheses(input, thestack); }
+            }
+
         }
 
         static void TestQueue(string input, Queue<string> queue) 
@@ -196,13 +204,13 @@ namespace SkalProj_Datastrukturer_Minne
 
             switch (nav)
             {
-                case '0':
-                    {
-                        return;
-                    }
+                //case '0':
+                //    {
+                //        return;
+                        
+                //    }
 
                 case '+':
-
                     {                
                         Console.WriteLine("Enter value:");
                         value = Console.ReadLine();
@@ -217,7 +225,6 @@ namespace SkalProj_Datastrukturer_Minne
                     }
 
                 case '-':
-
                     {
                         
                         queue.Dequeue();
@@ -242,13 +249,12 @@ namespace SkalProj_Datastrukturer_Minne
 
             switch (nav)
             {
-                case '0':
-                    {
-                        return;
-                    }
+                //case '0':
+                //    {
+                //        return;
+                //    }
 
                 case '+':
-
                     {
                         Console.WriteLine("Enter value:");
                         value = Console.ReadLine();
@@ -263,7 +269,6 @@ namespace SkalProj_Datastrukturer_Minne
                     }
 
                 case '-':
-
                     {
                         
                         stack.Pop();
@@ -278,7 +283,6 @@ namespace SkalProj_Datastrukturer_Minne
                     }
 
                 case '1':
-
                     {
                         Console.WriteLine("Please enter string:");
                         value = Console.ReadLine();
@@ -306,5 +310,97 @@ namespace SkalProj_Datastrukturer_Minne
 
         }
 
+        static void CheckParentheses(string input, Stack<char> stack)
+        {
+
+            char nav = input[0];
+            string value = input.Substring(1);
+            char x;
+
+            switch (nav)
+            {
+
+                case '1':
+                    {
+                        Console.WriteLine("Enter the string:");
+                        value = Console.ReadLine();
+
+                        //char[] exp = { '{', '(', ')', '}', '[', ']' };
+                        if (areParenthesisBalanced(value.ToCharArray(), stack))
+                            Console.WriteLine("Balanced ");
+                        else
+                            Console.WriteLine("Not Balanced ");
+
+                        break;
+                    }
+            }
+
+        }
+
+        static Boolean isMatchingPair(char character1, char character2)
+        {
+            if (character1 == '(' && character2 == ')')
+                return true;
+            else if (character1 == '{' && character2 == '}')
+                return true;
+            else if (character1 == '[' && character2 == ']')
+                return true;
+            else
+                return false;
+        }
+
+        static Boolean areParenthesisBalanced(char[] exp, Stack<char> st)
+        {
+            /* Declare an empty character stack */
+            //Stack<char> st = new Stack<char>();
+
+            /* Traverse the given expression to  
+                check matching parenthesis */
+            for (int i = 0; i < exp.Length; i++)
+            {
+                /*If the exp[i] is a starting  
+                    parenthesis then push it*/
+                if (exp[i] == '{' || exp[i] == '(' || exp[i] == '[')
+                    st.Push(exp[i]);
+
+                /* If exp[i] is an ending parenthesis  
+                    then pop from stack and check if the  
+                    popped parenthesis is a matching pair*/
+                if (exp[i] == '}' || exp[i] == ')' || exp[i] == ']')
+                {
+
+                    /* If we see an ending parenthesis without  
+                        a pair then return false*/
+                    if (st.Count == 0)
+                    {
+                        return false;
+                    }
+
+                    /* Pop the top element from stack, if  
+                        it is not a pair parenthesis of character  
+                        then there is a mismatch. This happens for  
+                        expressions like {(}) */
+
+                    else if (!isMatchingPair(st.Pop(), exp[i]))
+                    {
+                        return false;
+                    }
+                }
+
+            }
+
+            /* If there is something left in expression  
+                then there is a starting parenthesis without  
+                a closing parenthesis */
+
+            if (st.Count == 0)
+                return true; /*balanced*/
+            else
+            { /*not balanced*/
+                return false;
+            }
+        }
+
+       
     }
 }
