@@ -23,6 +23,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
+                    + "\n5. CheckRecursive"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -48,6 +49,10 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        CheckRecursive();
+                        break;
+
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -75,14 +80,11 @@ namespace SkalProj_Datastrukturer_Minne
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
             */
-
+            List<string> theList = new List<string>();
             while (true)
-
             {
-
                Console.WriteLine("Type '+' or '-'  to add or remove from the list or zero to exit :");
-
-               List<string> theList = new List<string>();
+               
                string input = Console.ReadLine();
                char nav = input[0];
                string value = input.Substring(1);
@@ -100,7 +102,12 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("Enter value:");
                             value = Console.ReadLine();
                             theList.Add(value);
-                           // Console.WriteLine($"theList[0]: {theList[0]} ");
+                            // Console.WriteLine($"theList[0]: {theList[0]} ");
+                            foreach (Object obj in theList)
+                            {
+                                Console.WriteLine("..............................");
+                                Console.WriteLine(obj);
+                            }
                             Console.WriteLine($"the List Capacity: {theList.Capacity }");
                             Console.WriteLine($"the List Count: {theList.Count }");
 
@@ -114,6 +121,11 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("Enter value:");
                             value = Console.ReadLine();
                             theList.Remove(value);
+                            foreach (Object obj in theList)
+                            {
+                                Console.WriteLine("..............................");
+                                Console.WriteLine(obj);
+                            }
                             // Console.WriteLine($"theList[0]: {theList[0]} ");
                             Console.WriteLine($"the List Capacity: {theList.Capacity }");
                             Console.WriteLine($"the List Count: {theList.Count }");
@@ -196,7 +208,55 @@ namespace SkalProj_Datastrukturer_Minne
 
         }
 
-        static void TestQueue(string input, Queue<string> queue) 
+        static void CheckRecursive()
+        {
+            while (true)
+            {
+                Console.WriteLine("Type '1' to check Even Recursive or '2'  to calculate Fibonaccisequence or zero to exit :");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '0':
+                        {
+                            return;
+                        }
+
+                    case '1':
+
+                        {
+                            Console.WriteLine("Enter number:");
+                            value = Console.ReadLine();
+                            int evenNum = Int32.Parse(value);
+                            Console.WriteLine("All even numbers from 1 to {0} are : ", evenNum);
+                            RecursiveEven(2, evenNum);
+                            Console.WriteLine("\n");
+                            break;
+
+                        }
+
+                    case '2':
+
+                        {
+                            Console.WriteLine("Enter the length of number:");
+                            value = Console.ReadLine();
+                            int evenNum = Int32.Parse(value);
+                            //Console.WriteLine("All even numbers from 1 to {0} are : ", evenNum);
+                            Fibonacci(0, 1, 1, evenNum);
+                            Console.WriteLine("\n");
+                            break;
+
+                        }
+
+
+                }
+            }
+        }
+
+            static void TestQueue(string input, Queue<string> queue) 
 
         {  
             char nav = input[0];
@@ -204,11 +264,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             switch (nav)
             {
-                //case '0':
-                //    {
-                //        return;
-                        
-                //    }
+                
 
                 case '+':
                     {                
@@ -220,7 +276,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("..............................");
                             Console.WriteLine(obj);
                         }
-                        Console.WriteLine($"Number of elements in the Queue: {0} : {queue.Count }");
+                        Console.WriteLine($"Number of elements in the Queue : {queue.Count }");
                         break;
                     }
 
@@ -233,7 +289,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("..............................");
                             Console.WriteLine(obj);
                         }
-                        Console.WriteLine($"Number of elements in the Queue: {0} : {queue.Count }");
+                        Console.WriteLine($"Number of elements in the Queue : {queue.Count }");
                         break;
                     }
 
@@ -249,11 +305,7 @@ namespace SkalProj_Datastrukturer_Minne
 
             switch (nav)
             {
-                //case '0':
-                //    {
-                //        return;
-                //    }
-
+               
                 case '+':
                     {
                         Console.WriteLine("Enter value:");
@@ -264,7 +316,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("..............................");
                             Console.WriteLine(obj);
                         }
-                        Console.WriteLine($"Number of elements in the Stack: {0} : {stack.Count }");
+                        Console.WriteLine($"Number of elements in the Stack : {stack.Count }");
                         break;
                     }
 
@@ -277,7 +329,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("..............................");
                             Console.WriteLine(obj);
                         }
-                        Console.WriteLine($"Number of elements in the Stack: {0} : {stack.Count }");
+                        Console.WriteLine($"Number of elements in the Stack : {stack.Count }");
                         break;
 
                     }
@@ -312,31 +364,27 @@ namespace SkalProj_Datastrukturer_Minne
 
         static void CheckParentheses(string input, Stack<char> stack)
         {
-
             char nav = input[0];
             string value = input.Substring(1);
-            char x;
-
+         
             switch (nav)
             {
-
                 case '1':
                     {
                         Console.WriteLine("Enter the string:");
                         value = Console.ReadLine();
 
-                        //char[] exp = { '{', '(', ')', '}', '[', ']' };
-                        if (areParenthesisBalanced(value.ToCharArray(), stack))
-                            Console.WriteLine("Balanced ");
+                        if (ParenthesisBalanced(value.ToCharArray(), stack))
+                            Console.WriteLine("Well formed ");
                         else
-                            Console.WriteLine("Not Balanced ");
+                            Console.WriteLine("Not well formed ");
 
                         break;
                     }
             }
 
         }
-
+        // chack match pairs
         static Boolean isMatchingPair(char character1, char character2)
         {
             if (character1 == '(' && character2 == ')')
@@ -349,17 +397,13 @@ namespace SkalProj_Datastrukturer_Minne
                 return false;
         }
 
-        static Boolean areParenthesisBalanced(char[] exp, Stack<char> st)
-        {
-            /* Declare an empty character stack */
-            //Stack<char> st = new Stack<char>();
-
-            /* Traverse the given expression to  
-                check matching parenthesis */
+        static Boolean ParenthesisBalanced(char[] exp, Stack<char> st)
+        {    
+           
+             //check matching parenthesis 
             for (int i = 0; i < exp.Length; i++)
             {
-                /*If the exp[i] is a starting  
-                    parenthesis then push it*/
+                //If the exp[i] is a starting parenthesis then push it
                 if (exp[i] == '{' || exp[i] == '(' || exp[i] == '[')
                     st.Push(exp[i]);
 
@@ -368,7 +412,6 @@ namespace SkalProj_Datastrukturer_Minne
                     popped parenthesis is a matching pair*/
                 if (exp[i] == '}' || exp[i] == ')' || exp[i] == ']')
                 {
-
                     /* If we see an ending parenthesis without  
                         a pair then return false*/
                     if (st.Count == 0)
@@ -378,8 +421,7 @@ namespace SkalProj_Datastrukturer_Minne
 
                     /* Pop the top element from stack, if  
                         it is not a pair parenthesis of character  
-                        then there is a mismatch. This happens for  
-                        expressions like {(}) */
+                        then there is a mismatch. */
 
                     else if (!isMatchingPair(st.Pop(), exp[i]))
                     {
@@ -394,13 +436,31 @@ namespace SkalProj_Datastrukturer_Minne
                 a closing parenthesis */
 
             if (st.Count == 0)
-                return true; /*balanced*/
+                return true; //balanced
             else
-            { /*not balanced*/
-                return false;
+            { 
+                return false; //not balanced
+            }
+        }
+        
+        static void RecursiveEven(int startVal, int number)
+        {
+            if (startVal > number)
+                return;
+            Console.Write(" {0}  ", startVal);
+            RecursiveEven(startVal + 2, number);
+        }
+
+        static void Fibonacci(int a, int b, int counter, int len)
+        {
+            if (counter <= len)
+            {
+                Console.Write("{0} ", a);
+                Fibonacci(b, a + b, counter + 1, len);
             }
         }
 
-       
+
+
     }
 }
