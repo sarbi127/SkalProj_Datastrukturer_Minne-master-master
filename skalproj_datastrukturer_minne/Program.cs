@@ -24,6 +24,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParanthesis"
                     + "\n5. CheckRecursive"
+                    + "\n6. CheckIterative"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -51,6 +52,9 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case '5':
                         CheckRecursive();
+                        break;
+                    case '6':
+                        CheckIterative();
                         break;
 
                     /*
@@ -212,7 +216,7 @@ namespace SkalProj_Datastrukturer_Minne
         {
             while (true)
             {
-                Console.WriteLine("Type '1' to check Even Recursive or '2'  to calculate Fibonaccisequence or zero to exit :");
+                Console.WriteLine("Type '1' to check Even Recursive or '2'  to calculate Fibonaccisequence Recursive or zero to exit :");
 
                 string input = Console.ReadLine();
                 char nav = input[0];
@@ -231,8 +235,8 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("Enter number:");
                             value = Console.ReadLine();
                             int evenNum = Int32.Parse(value);
-                            Console.WriteLine("All even numbers from 1 to {0} are : ", evenNum);
-                            RecursiveEven(2, evenNum);
+                            Console.WriteLine("Result are:", evenNum);
+                            Console.Write("{0} ", RecursiveEven(evenNum));
                             Console.WriteLine("\n");
                             break;
 
@@ -244,8 +248,7 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine("Enter the length of number:");
                             value = Console.ReadLine();
                             int evenNum = Int32.Parse(value);
-                            //Console.WriteLine("All even numbers from 1 to {0} are : ", evenNum);
-                            Fibonacci(0, 1, 1, evenNum);
+                            FibonacciRecursive(0, 1, 1, evenNum);
                             Console.WriteLine("\n");
                             break;
 
@@ -256,7 +259,55 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
 
-            static void TestQueue(string input, Queue<string> queue) 
+        static void CheckIterative()
+        {
+            while (true)
+            {
+                Console.WriteLine("Type '1' to check Even Iterative or '2'  to calculate Fibonaccisequence Iterative or zero to exit :");
+
+                string input = Console.ReadLine();
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '0':
+                        {
+                            return;
+                        }
+
+                    case '1':
+
+                        {
+                            Console.WriteLine("Enter number:");
+                            value = Console.ReadLine();
+                            int evenNum = Int32.Parse(value);
+                            Console.WriteLine("Result are: ", evenNum);
+                            Console.Write("{0} ", IterativeEven(evenNum));
+                            Console.WriteLine("\n");
+                            break;
+
+                        }
+
+                    case '2':
+
+                        {
+                            Console.WriteLine("Enter the integer n to find nth fibonnaci no:");
+                            value = Console.ReadLine();
+                            int evenNum = Int32.Parse(value); 
+                            Console.Write("{0} ", FibonacciIterative(0, 1, 1, evenNum));
+                            Console.WriteLine("\n");
+                            break;
+
+                        }
+
+
+                }
+            }
+        }
+
+        // Add and remove from Queue
+        static void TestQueue(string input, Queue<string> queue) 
 
         {  
             char nav = input[0];
@@ -264,8 +315,6 @@ namespace SkalProj_Datastrukturer_Minne
 
             switch (nav)
             {
-                
-
                 case '+':
                     {                
                         Console.WriteLine("Enter value:");
@@ -297,6 +346,7 @@ namespace SkalProj_Datastrukturer_Minne
 
         }
 
+        // Add and remove and reverse from Stack
         static void TestStack(string input, Stack<string> stack)
 
         {
@@ -361,7 +411,7 @@ namespace SkalProj_Datastrukturer_Minne
             }
 
         }
-
+        // CheckParentheses method
         static void CheckParentheses(string input, Stack<char> stack)
         {
             char nav = input[0];
@@ -443,24 +493,51 @@ namespace SkalProj_Datastrukturer_Minne
             }
         }
         
-        static void RecursiveEven(int startVal, int number)
+        // Find nth even number use Recursive function
+        static int RecursiveEven( int number)
         {
-            if (startVal > number)
-                return;
-            Console.Write(" {0}  ", startVal);
-            RecursiveEven(startVal + 2, number);
+            if (number == 0)
+            { return 0; }
+            return (RecursiveEven(number - 1) + 2);
+
         }
 
-        static void Fibonacci(int a, int b, int counter, int len)
+        // Find Fibonacci numbers use Recursive function
+        static void FibonacciRecursive(int a, int b, int counter, int len)
         {
             if (counter <= len)
             {
                 Console.Write("{0} ", a);
-                Fibonacci(b, a + b, counter + 1, len);
+                FibonacciRecursive(b, a + b, counter + 1, len);
             }
         }
 
+        // Find nth even number use Iterative function
+        static int IterativeEven( int number)
+        {
+            
+            if (number == 0) return 0;
+            int result = 0;
+            for (int i = 0 ; i < number; i++)
+            {
+                result += 2;    
+            }
+            return result;
+        }
 
+        // Find Fibonacci numbers use Iterative function
+        static long FibonacciIterative(int previous, int current, int next, int len)
+        {
+            if (len < 2)
+                return len;
+            for (int i = 3; i <= len; ++i)
+            {
+                next = current + previous;
+                previous = current;
+                current = next;
+            }
+            return next;
+        }
 
     }
 }
