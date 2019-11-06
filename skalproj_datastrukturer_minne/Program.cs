@@ -190,7 +190,9 @@ namespace SkalProj_Datastrukturer_Minne
 
 
         }
-
+        /// <summary>
+        /// Examines the CheckParanthesis
+        /// </summary>
         static void CheckParanthesis()
         {
             /*
@@ -211,7 +213,9 @@ namespace SkalProj_Datastrukturer_Minne
             }
 
         }
-
+        /// <summary>
+        /// Examines the CheckRecursive
+        /// </summary>
         static void CheckRecursive()
         {
             while (true)
@@ -258,7 +262,9 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
-
+        /// <summary>
+        /// Examines the CheckIterative
+        /// </summary>
         static void CheckIterative()
         {
             while (true)
